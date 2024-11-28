@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://i.pinimg.com/564x/c5/84/c5/c584c5ba7106466ec6d66aad0024eb42.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            justify-content: flex-start;
+            align-items: flex-start;
+            height: 100vh;
+            padding: 0 40px;
+        }
+        .product-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            margin-left: 40px;
+            margin-top: 100px;
+        }
+        .product-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .product-container input[type="text"],
+        .product-container input[type="number"],
+        .product-container textarea,select{
+            width: 95%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .product-container input[type="file"] {
+            margin: 10px 0;
+        }
+        .product-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: rgb(232, 125, 143);
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .product-container input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="product-container">
+        <h2>Update Product</h2>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" name="Product_Name" placeholder="Product Name" value="{{ val.Product_Name }}" required>
+            <img src="{{ val.Image.url }}" alt="" width="50" height="50"> 
+            <input type="file" name="Image">
+            
+            <select name="Categorytype" id="category" required>
+                <option value="" disabled {% if not selected_category_id %}selected{% endif %}>Select the Category</option>
+                {% for category in categories %}
+                    <option value="{{ category.id }}" {% if category.id == selected_category_id %}selected{% endif %}>{{ category.Categorytype }}</option>
+                {% endfor %}
+            </select>
+            
+            
+            <textarea name="Description" placeholder="Product Description" rows="4" required>{{ val.Description }}</textarea>
+            <input type="text" name="Price" placeholder="Price" value="{{ val.Price }}" required>
+            <input type="text" name="Quantity" placeholder="Quantity" value="{{ val.Quantity }}" required>
+            <input type="submit" value="Update Product">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complaints</title>
+</head>
+<body>
+    <table style="width: 100%; border-collapse: collapse; margin: 20px 0;">
+        <thead>
+            <tr style="background-color: #f2f2f2; color: #333;">
+                <th style="border: 1px solid #ddd; padding: 8px;">Customer Name</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Email</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Complaint</th>
+                <th style="border: 1px solid #ddd; padding: 8px;">Actions</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+            {%for i in val%}
+            <tr>
+                <td style="border: 1px solid #ddd; padding: 8px;">{{i.USERLID.First_Name}}</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">{{i.USERLID.Email}}</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">{{i.Complaint}}</td>
+                <td style="border: 1px solid #ddd; padding: 8px;">
+                    {% if i.Reply %}
+                        {{ i.Reply }}
+                    {% else %}
+                        <a href="Reply/{{ i.id }}">Reply</a>
+                    {% endif %}
+                </td>
+                
+               
+               
+            </tr>
+            {%endfor%}
+            <!-- More rows can be added here -->
+        </tbody>
+    </table>
+</body>
+</html>

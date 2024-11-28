@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://i.pinimg.com/originals/79/90/d0/7990d0ce140f9dcfe9e31353f5d15e93.jpg');
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            justify-content: flex-start; /* Align items to the left */
+            align-items: flex-start; /* Align items to the top */
+            height: 100vh;
+            padding: 0 40px; /* Add padding to the body to move content away from edges */
+        }
+        .register-container {
+            margin-right: 30px;
+            background-color: #ffffff;
+            padding: 20px;
+            margin-left: 40px;
+            margin-top: 50px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        .register-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .register-container input[type="text"], 
+        .register-container input[type="email"], 
+        .register-container input[type="password"] {
+            width: 95%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+       
+        .register-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color:  #971b1bbf;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .register-container input[type="submit"]:hover {
+            background-color: rgb(175, 81, 81);
+        }
+        .register-container .login-link {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .register-container .login-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-container">
+        <h2>Register</h2>
+        <form action="" method="POST">
+            {% csrf_token %}
+        
+            <input type="text" name="Name" placeholder="Shop Name" required>
+            <input type="text" name="Owner_Name" placeholder="Owner Name" required>
+            <input type="email" name="Email" placeholder="Email" required>
+            <input type="text" name="Phone_number" placeholder="Phone Number" required>
+            <input type="text" name="Place" placeholder="Place" required>
+            <input type="text" name="Post" placeholder="Post" required>
+            <input type="text" name="Pin" placeholder="Pin" required>
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="submit" value="Register">
+        </form>
+       
+    </div>
+</body>
+</html>

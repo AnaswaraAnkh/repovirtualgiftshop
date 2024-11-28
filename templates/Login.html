@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('https://img.freepik.com/free-photo/woman-with-laptop-near-plastic-card-present-box-snag-fairy-lights_23-2147973977.jpg?size=626&ext=jpg&ga=GA1.1.2008272138.1720656000&semt=ais_user');
+            background-repeat: no-repeat;
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .login-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 500px;
+        }
+        .login-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .login-container input[type="text"], 
+        .login-container input[type="password"] {
+            width: 95%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .login-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #971b1bbf;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .login-container input[type="submit"]:hover {
+            background-color: #df1220;
+        }
+        .login-container .register-link, 
+        .login-container .forgot-password {
+            text-align: center;
+            margin-top: 10px;
+        }
+        .login-container .register-link a,
+        .login-container .forgot-password a {
+            color: #972929;
+            text-decoration: none;
+        }
+        .login-container .forgot-password a {
+            display: block; /* Make the link occupy full width */
+            margin-top: 10px; /* Add space between login button and forgot password link */
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <input type="submit" value="Login">
+        </form>
+        <div class="register-link">
+            <p>Don't have an account? <a href="shop/shop ">Register here</a></p>
+        </div>
+        <div class="forgot-password">
+            <p><a href="Sendotp">Forgot your password?</a></p>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offer Details</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-family: Arial, sans-serif;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        caption {
+            caption-side: top;
+            font-size: 1.5em;
+            margin: 10px 0;
+        }
+        /* Add Product Button */
+        .add-product-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        /* Container for the Add Product Button */
+        .add-product-container {
+            text-align: left;
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="add-product-container"></div>
+        <a href="AddOffer" class="add-product-btn">Add Offer</a>
+    </div>
+    <table>
+       
+        <thead>
+            <tr>
+                <th>Offer Name</th>
+                <th>Description</th>
+                <th>Discount Percentage</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th colspan="2">Actions</th>
+                
+            </tr>
+        </thead>
+        <tbody>
+           {%for i in val%}
+             <tr>
+                <td>{{i.Offer_Title}}</td>
+                <td>{{i.Offer_Description}}</td>
+                <td>{{i.Offer_Percentage}}</td>
+                <td>{{i.Start_date}}</td>
+                <td>{{i.End_date}}</td>
+                <td><a href="OfferEdit/{{i.id}}">Edit</a></td>
+                <td><a href="OfferDelete/{{i.id}}">Delete</a></td>
+             </tr>
+             {%endfor%}
+        </tbody>
+    </table>
+</body>
+</html>

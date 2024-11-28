@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Offer</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0; /* Ensure body margin is zero */
+        }
+        .offer-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        .offer-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .offer-container input[type="text"], 
+        .offer-container input[type="number"], 
+        .offer-container input[type="date"], 
+        .offer-container textarea,
+        .offer-container select {
+            width: 97%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .offer-container textarea {
+            resize: vertical; /* Allow vertical resizing only */
+            height: 100px; /* Set a fixed height for the textarea */
+        }
+        .offer-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .offer-container input[type="submit"]:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="offer-container">
+        <h2>Add Offer</h2>
+        <form action="" method="POST">
+            {%csrf_token%}
+            <input type="text" name="Offer_Title" placeholder="Offer Name" required>
+           
+            <select name="product" id="category">
+              
+                <option value="" disabled selected>Select Product</option>
+                {% for i in val %}
+                <option value="{{ i.id }}">{{ i.Product_Name }}</option>
+                {% endfor %}
+            </select>
+            <textarea name="Offer_Description" placeholder="Offer Description" required></textarea>
+            <input type="number" name="Offer_Percentage" placeholder="Discount Percentage" min="0" max="100" required>
+            <input type="date" name="Start_date" required>
+            <input type="date" name="End_date" required>
+            <input type="submit" value="Add Offer">
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Delivery Details</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .delivery-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 500px;
+            max-width: 90%;
+        }
+        .delivery-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .delivery-container input[type="text"], 
+        .delivery-container input[type="number"], 
+        .delivery-container input[type="date"],
+        .delivery-container textarea,
+        .delivery-container select {
+            width: calc(100% - 22px); /* Adjust for padding */
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box; /* Ensure padding is included in width */
+        }
+        .delivery-container input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: rgb(76, 175, 80); /* Green color */
+            color: #ffffff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .delivery-container input[type="submit"]:hover {
+            background-color: rgb(56, 142, 60); /* Darker green for hover effect */
+        }
+    </style>
+</head>
+<body>
+    <div class="delivery-container">
+        <h2>Upload Delivery Details</h2>
+        <form action="" method="POST">
+            {%csrf_token%}
+            <input type="text" name="ProductName" placeholder=" Product Name" required>
+            <input type="text" name="Customer_Name" placeholder="Customer Name" required>
+            <input type="text" name="Location" placeholder="Delivery Address" required>
+            <input type="text" name="Phone_Number" placeholder="Contact Number" required>
+            <input type="date" name="Delivery_Date" placeholder="Delivery Date" required>
+            <select name="Status" required>
+                <option value="" disabled selected>Select Status</option>
+                <option value="Pending">Pending</option>
+                <option value="In Transit">In Transit</option>
+                <option value="Delivered">Delivered</option>
+                <option value="Cancelled">Cancelled</option>
+            </select>
+           
+            <input type="submit" value="Update Delivery">
+        </form>
+    </div>
+</body>
+</html>

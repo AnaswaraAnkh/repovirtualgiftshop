@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--divinectorweb.com-->
+<head>
+    <meta charset="UTF-8">
+    <title>How to Create a Responsive Website using HTML CSS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Montserrat', sans-serif;
+    }
+    html {
+        scroll-behavior: smooth;
+    }
+    nav ul {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+        width: 260px;
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: #262626;
+    }
+    nav ul li {
+        list-style: none;
+    }
+    nav ul li a {
+        display: block;
+        padding: 25px 0;
+        text-align: center;
+        font-family: montserrat;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-size: 20px;
+        color: #fff;
+        border-bottom: 1px solid #ccc
+    }
+    nav ul li a:hover {
+        background-color: deepskyblue;
+    }
+    .right-content {
+        margin-left: 260px;
+    }
+    .section {
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        text-align: center;
+    }
+    .section:nth-child(2) {
+        background-color: #fff;
+    }
+    .section:nth-child(3) {
+        background-color: #ddd;
+    }
+    .section:nth-child(4) {
+        background-color: #fff;
+    }
+    .text-content h2 {
+        text-transform: uppercase;
+        font-size: 50px;
+    }
+    .text-content p {
+        line-height: 2;
+    }
+    .text-content {
+        width: 75%;
+    }
+    #home {
+        background-image: url('https://i.pinimg.com/474x/b4/eb/ec/b4ebec82e2e294bb3552d92ba59e8cb0.jpg');
+        background-size: cover;
+        
+       
+        
+    }
+    .img-area {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        overflow: hidden;
+        margin: 25px auto;
+        border: 15px double #fff;
+    }
+    .img-area img {
+        width: 100%;
+    }
+    @media (max-width: 900px) {
+        nav {
+            background: #fff;
+            height: 86px;
+        }
+        nav ul {
+            width: 100%;
+            border-right: none;
+            height: 60px;
+        }
+        nav ul li a {
+            border-bottom: none;
+            float: left;
+            margin-left: 100px;
+        }
+        nav ul li a:hover {
+            background-color: transparent;
+        }
+        .right-content {
+            margin-left: 0;
+        }
+        .img-area {
+            display: none;
+        }
+        .text-content h2 {
+            font-size: 30px;
+        }
+    }
+    @media (max-width:600px) {
+        nav {
+            background: #fff;
+            height: 60px;
+        }
+        nav ul li a:hover {
+            background-color: transparent;
+        }
+        nav ul {
+            width: 100%;
+            border-right: none;
+            height: 60px;
+        }
+        nav ul li a {
+            border-bottom: none;
+            float: left;
+            margin-left: 15px;
+            font-size: 12px;
+        }
+        .right-content {
+            margin-left: 0;
+        }
+        .img-area {
+            display: none;
+        }
+        .text-content h2 {
+            font-size: 30px;
+        }
+    }
+    </style>   
+</head>
+<body>
+    <nav>
+        <ul>
+           <li class="img-area"><img src="data:image/png;base64,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" alt=""></li>
+            <li><a href="/giftadmin/Adminhome">Home</a></li>
+            <li><a href="/giftadmin/Verify_Shop">Shop Verification</a></li>
+            <li><a href="/giftadmin/updateorderstatus">Update Order Status</a></li>
+            <li><a href="/giftadmin/ViewComplaint">Complaints</a></li>
+            <li><a href="">Logout</a></li>
+           
+        </ul>
+    </nav>
+    
+    <div class="right-content">
+        <div id="home" class="section">
+            <div class="text-content">
+                <h2 style="color: #fff">Homepage</h2>
+            </div>
+        </div>
+        <!-- <div id="about" class="section">
+            <div class="text-content">
+                <h2>About Us</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut dicta quas qui, natus. Omnis debitis pariatur perferendis iure magnam quas beatae vitae.</p>
+            </div>
+        </div>
+        <div id="blog" class="section">
+            <div class="text-content">
+                <h2>My Work</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut dicta quas qui, natus. Omnis debitis pariatur perferendis iure magnam quas beatae vitae.</p>
+            </div>
+        </div>
+        <div id="contact" class="section">
+            <div class="text-content">
+                <h2>Contact Us</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ut dicta quas qui, natus. Omnis debitis pariatur perferendis iure magnam quas beatae vitae.</p>
+            </div>
+        </div> -->
+    </div>
+</body>
+</html>

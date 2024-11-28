@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Details Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        /* Add Product Button */
+        .add-product-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        /* Container for the Add Product Button */
+        .add-product-container {
+            text-align: right;
+            margin: 20px;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        thead {
+            background-color: #f2f2f2;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <!-- Add Product Button -->
+    <div class="add-product-container">
+        <a href="AddProducts" class="add-product-btn">Add Product</a>
+    </div>
+    
+    <!-- Table -->
+    <table>
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Image</th>
+                <th>Category</th>
+                <th>Price</th>
+                <th>Description</th>
+                <th>Quantity</th>
+                <th colspan="2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {%for i in val%}
+            <tr>
+                <td>{{i.Product_Name}}</td>
+                <td><img src="{{i.Image.url}}"alt="" height="50" width="50"></td>
+                <td>{{i.Categorytype.Categorytype}}</td>
+                <td>{{i.Price}}</td>
+                <td>{{i.Description}}</td>
+                <td>{{i.Quantity}}</td>
+                <td><a href="ProductEdit/{{i.id}}">Edit</a></td>
+                <td><a href="ProductDelete/{{i.id}}">Delete</a></td>
+            </tr>
+            {%endfor%}
+            <!-- More rows can be added here -->
+        </tbody>
+    </table>
+</body>
+</html>
