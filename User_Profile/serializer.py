@@ -96,16 +96,29 @@ class OrderSerializer(ModelSerializer):
             
         ]
 
-class ReviewSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Rating_Review_Table
-        fields = ['USERLID', 'PRODUCTID', 'Rating', 'Review','Date']
 
+from rest_framework import serializers
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User_Table
+        fields = ['First_Name', 'Last_Name', 'Email','profileimage']  # Include fields you want to expose
 
 class ReviewSerializerview(serializers.ModelSerializer):
-    product_name = serializers.CharField(source='PRODUCTID.Product_name', read_only=True)  # Assuming `product_name` is the field in Product_Table
-    username = serializers.CharField(source='USERLID.username', read_only=True)  # Assuming `username` is the field in User_Table
+    USERLID = UserSerializer()  # Nested serializer for user details
 
     class Meta:
         model = Rating_Review_Table
-        fields = ['product_name', 'username', 'Rating', 'Review', 'Date', 'created_at', 'updated_at']
+        fields = ['USERLID', 'PRODUCTID', 'Rating', 'Review','Date'] # Include fields you want to expose
+
+
+
+
+
+# class ReviewSerializerview(serializers.ModelSerializer):
+#     product_name = serializers.CharField(source='PRODUCTID.Product_name', read_only=True)  # Assuming `product_name` is the field in Product_Table
+#     username = serializers.CharField(source='USERLID.username', read_only=True)  # Assuming `username` is the field in User_Table
+
+#     class Meta:
+#         model = Rating_Review_Table
+#         fields = ['product_name', 'username', 'Rating', 'Review', 'Date', 'created_at', 'updated_at']

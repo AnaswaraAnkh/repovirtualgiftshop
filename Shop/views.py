@@ -217,17 +217,28 @@ class OfferDelete(View):
         obj.save()
         return HttpResponse('''<script>alert("successfully deleted");window.location="/shop/ViewOffer"</script>''')
     
+from django.shortcuts import render
+from django.views import View
+from .models import Order_Table, Orderitem_Table
+
 class CustomerOrders(View):
     def get(self, request):
+        # Fetch the logged-in shop owner ID
         login_id = request.session.get("user_id")
-        print("logid",login_id)
-        orders = Order_Table.objects.filter(SHOPLID=login_id)
-        print(orders)
-        order_items = Orderitem_Table.objects.filter(ORDERID__in=orders)
-        for item in order_items:
-         item.total_amount = item.Quantity * item.Price
+        print("Shop Owner ID:", login_id)
 
-        return render(request, 'View Orders.html', {'order_items': order_items,'total_amount':item.total_amount})
+        # Fetch orders where the shop owner's product is involved
+        orders = Order_Table.objects.filter(PRODUCTID__SHOPLID=login_id).all()
+
+        # Fetch the corresponding order items
+        order_items = Orderitem_Table.objects.filter(ORDERID__in=orders)
+
+        # Calculate total amount for each order item
+        for item in order_items:
+            item.total_amount = item.Quantity * item.Price
+
+        # Render the orders in the template
+        return render(request, 'View Orders.html', {"order_items": order_items})
 
 
 class UploadDeliverystatus(View):
@@ -242,12 +253,19 @@ class UploadDeliverystatus(View):
     
 
 class Rating_Review(View):
-    def get(self,request):
+    def get(self, request):
+        # Get the shop owner's login ID from the session
         login_id = request.session.get("user_id")
-        print(login_id)
-        obj=Rating_Review_Table.objects.filter(SHOPLID=login_id).select_related('USERLID')
-        print(obj)
-        return render(request,'View Review.html',{'val':obj})
+        print("Shop Owner ID:", login_id)
+
+        # Fetch reviews for the products added by this shop owner
+        reviews = Rating_Review_Table.objects.filter(PRODUCTID__SHOPLID=login_id).select_related('USERLID', 'PRODUCTID')
+
+        # Debug print to verify the fetched reviews
+        print("Reviews:", reviews)
+
+        # Render the reviews in the template
+        return render(request, 'View Review.html', {'reviews': reviews})
     
 
 from rest_framework.views import APIView

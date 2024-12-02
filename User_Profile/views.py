@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404, render
 from django.views import View
 from rest_framework.views import APIView
 
-from User_Profile.serializer import CategorySerializer, DeliverySerializer, LoginSerializer, OrderItemSerializer, OrderSerializer, ProductSerializer1, ReviewSerializer, ReviewSerializerview, UserSerializer, UserTableSerializer
+from User_Profile.serializer import CategorySerializer, DeliverySerializer, LoginSerializer, OrderItemSerializer, OrderSerializer, ProductSerializer1,ReviewSerializerview, UserSerializer, UserTableSerializer
 from django.contrib.auth.hashers import make_password
 from django.http import HttpResponse
 from rest_framework.response import Response
@@ -159,27 +159,21 @@ class LoginPage(APIView):
 
         # Fetch additional user details from User_Table
         user_details = User_Table.objects.filter(LOGINID=t_user).first()
-        print(user_details)
 
         # Successful login response
         response_dict["message"] = "success"
         response_dict["login_id"] = t_user.id  
-        
 
         # Include user-specific details if available
         if user_details:
-            # Assuming `user_details` contains the related User_Table object
-            response_dict["id"]=user_details.id
+            response_dict["id"] = user_details.id
             response_dict["Full_Name"] = f"{user_details.First_Name} {user_details.Last_Name}".strip()
-
             response_dict["Address"] = user_details.Address
             response_dict["City"] = user_details.City
             response_dict["District"] = user_details.District
             response_dict["Pincode"] = user_details.Pincode
             response_dict["Phone_Number"] = user_details.Phone_Number
             response_dict["profileImage"] = user_details.profileimage.url
-
-           
         else:
             # Default values if user details are not found
             response_dict["First_Name"] = None
@@ -190,6 +184,17 @@ class LoginPage(APIView):
             response_dict["Pincode"] = None
             response_dict["Phone_Number"] = None
             response_dict["profileimage"] = None
+
+        # # Fetch product details (assumes a Product_Table related to the user or login)
+        # product_details = Product_Table.objects.filter(SHOPLID=user_details).first()
+
+        # if product_details:
+        #     response_dict["id"] = product_details.id
+        #     response_dict["Product_Name"] = product_details.Product_Name
+        # else:
+        #     # Default product details if not found
+        #     response_dict["product_id"] = None
+        #     response_dict["product_name"] = None
 
         return Response(response_dict, status=HTTP_200_OK)
 
@@ -596,7 +601,7 @@ class AddReviewAPIView(APIView):
                 Review=comment, 
                 Date=date.today() 
             )
-            serializer = ReviewSerializer(review)
+            serializer = ReviewSerializerview(review)
             return Response({"success": True, "data": serializer.data}, status=status.HTTP_201_CREATED)
         except Exception as e:
             return Response({"success": False, "message": f"Error: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
@@ -605,9 +610,17 @@ class AddReviewAPIView(APIView):
 class ViewProductReviewsAPIView(APIView):
     def get(self, request, product_id):
         try:
-            reviews = Rating_Review_Table.objects.filter(product_id=product_id)
+            # Fetch reviews with related user details
+            reviews = Rating_Review_Table.objects.filter(PRODUCTID=product_id, is_active=True).select_related('USERLID')
+
+            # Serialize the reviews
             serializer = ReviewSerializerview(reviews, many=True)
+            
             return Response({"success": True, "data": serializer.data}, status=status.HTTP_200_OK)
+        
+        except Rating_Review_Table.DoesNotExist:
+            return Response({"success": False, "message": "No reviews found for this product."}, status=status.HTTP_404_NOT_FOUND)
+        
         except Exception as e:
             return Response({"success": False, "message": f"Error: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 

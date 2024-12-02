@@ -55,8 +55,9 @@ class Offer_Table(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
+
 class Order_Table(models.Model):
-    SHOPLID=models.ForeignKey(Shop_Table,on_delete=models.CASCADE,blank=True,null=True)
+    PRODUCTID=models.ForeignKey(Product_Table,on_delete=models.CASCADE,blank=True,null=True)
     USERLID=models.ForeignKey(User_Table,on_delete=models.CASCADE,blank=True,null=True)
     Date=models.DateField(max_length=20,null=True,blank=True)
     Total_Amount=models.IntegerField(null=True,blank=True)
@@ -67,6 +68,7 @@ class Order_Table(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
 
+
 class Orderitem_Table(models.Model):
     PRODUCTID=models.ForeignKey(Product_Table,on_delete=models.CASCADE,blank=True,null=True)
     Quantity=models.IntegerField(null=True,blank=True)
@@ -76,6 +78,10 @@ class Orderitem_Table(models.Model):
     is_active = models.BooleanField(default=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
     updated_at = models.DateTimeField(auto_now_add=True, null=True, blank=True)
+
+
+
+
 
 class Complaint_Table(models.Model):
     USERLID=models.ForeignKey(User_Table,on_delete=models.CASCADE,null=True,blank=True)
